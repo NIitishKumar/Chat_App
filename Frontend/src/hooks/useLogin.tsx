@@ -11,7 +11,7 @@ function useLogin() {
 
         setIsLoading(true)
         try {
-            const data:any = await fetch("api/auth/login", {
+            const data:any = await fetch("http://localhost:8999/api/auth/login", {
                 method:"POST",
                  body : JSON.stringify({userName, password}),
                  headers: {"Content-Type" : "application/json"}
@@ -19,6 +19,7 @@ function useLogin() {
             if(data.error){
                 throw new Error(data.error)  
             }
+            return data.json()            
         } catch (error:any) {
             toast.error(error.message);
         } finally{

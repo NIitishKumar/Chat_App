@@ -11,7 +11,7 @@ export const useAuthContext = () => {
   };
   
 export const AuthContextProvider =  ({ children }:any) => {
-    const [authUser, setAuthUser] = useState<any>(JSON.parse(localStorage.getItem("chat_user") as string) || null);
+    const [authUser, setAuthUser] = useState<any>(JSON.parse(localStorage.getItem("currentUser") as string) || null);
 
     return <AuthContext.Provider value = {{authUser, setAuthUser}}> {children} </AuthContext.Provider>
 

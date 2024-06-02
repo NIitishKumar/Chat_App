@@ -26,7 +26,7 @@ const  useSignup = () => {
 
             const res = await data.json();
             setAuthUser(res)
-            localStorage.setItem("chat_user", JSON.stringify(res))
+            localStorage.setItem("currentUser", JSON.stringify(res))
         } catch (error:any) {
             toast.error(error.message)
         } finally{

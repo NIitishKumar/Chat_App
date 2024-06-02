@@ -8,7 +8,7 @@ import { useAuthContext } from './context/AuthContext.tsx'
 
 function App() {
 
-  const { authUser } = useAuthContext();
+  const { authUser }:any = useAuthContext();
   return (
     <>
       <div className='h-screen p-4  flex items-center justify-center'>

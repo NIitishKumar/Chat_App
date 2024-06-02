@@ -1,7 +1,4 @@
- import React from 'react'
 import Sidebar from '../../components/Sidebar'
-import Conversations from '../../components/Conversations'
-import Messages from '../../components/messages/Messages'
 import MessageContainer from '../../components/messages/MessageContainer'
  
  function Home() {

@@ -2,6 +2,10 @@
 // import { extractTime } from "../../utils/extractTime";
 // import useConversation from "../../zustand/useConversation";
 
+import { useContext } from "react";
+import { SelectedUserContext } from "../../context/SelectedUser";
+import { getCurrentUser } from "../../utils/helper";
+
 const Message:any = ({ message }:any) => {
 	// const { authUser } = useAuthContext();
 	// const { selectedConversation } = useConversation();
@@ -12,15 +16,17 @@ const Message:any = ({ message }:any) => {
 	// const bubbleBgColor = fromMe ? "bg-blue-500" : "";
 
 	// const shakeClass = message.shouldShake ? "shake" : "";
+	
+	const { selectedUser }:any = useContext(SelectedUserContext);
 
 	return (
-		<div className={`chat chat-end`}>
+		<div className={`chat ${ message?.receiverId == getCurrentUser()._id ? "chat-start" :  "chat-end"}`}>
 			<div className='chat-image avatar'>
 				<div className='w-10 rounded-full'>
-					<img alt='Tailwind CSS chat bubble component' src={""} />
+					<img alt='Tailwind CSS chat bubble component' src={selectedUser.profilePic} />
 				</div>
 			</div>
-			<div className={`chat-bubble text-white  pb-2`}>{"message.message"}</div>
+			<div className={`chat-bubble text-white  pb-2`}>{message.message}</div>
 			<div className='chat-footer opacity-50 text-xs flex gap-1 items-center'>{"formattedTime"}</div>
 		</div>
 	);

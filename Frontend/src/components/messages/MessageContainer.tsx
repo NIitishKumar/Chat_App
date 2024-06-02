@@ -1,12 +1,19 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
 import MessageInput from "./MessageInput";
 import Messages from "./Messages";
 import { TiMessages } from "react-icons/ti";
+import { SelectedUserContext } from "../../context/SelectedUser";
+import { getCurrentUser } from "../../utils/helper";
+import { toast } from "react-toastify";
+import { MessagesContext } from "../../context/Messages.context";
+
+
 
 const MessageContainer = () => {
+    
+    const { selectedUser }:any = useContext(SelectedUserContext);        
 
     const NoChatSelected = () => {
-        // const { authUser } = useAuthContext();
         return (
             <div className='flex items-center justify-center w-full h-full'>
                 <div className='px-4 text-center sm:text-lg md:text-xl text-gray-200 font-semibold flex flex-col items-center gap-2'>
@@ -20,28 +27,61 @@ const MessageContainer = () => {
         );
     };
 
+    const { listMessages, message, setMessage, getMessages }:any = useContext(MessagesContext);
 
-    const [selectedConversation, setSelectedConversation] = useState<any>(false);
+    const messageContainer:any = useRef(null);
+    const lastMessageRef:any = useRef(null);
+  
+    useEffect(() => {
+        if (lastMessageRef.current) {
+          lastMessageRef.current?.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, [listMessages]);
 
-    // useEffect(() => {
-    //     // cleanup function (unmounts)
-    //     return () => setSelectedConversation(null);
-    // }, [setSelectedConversation]);
 
+	const handleSendMessage = async (e: any) => {
+		e.preventDefault();
 
+		if(!message) {
+			toast.error("Please Enter Message.");
+			return;
+		}
+		let payload:any = {
+			senderId: getCurrentUser()?._id,
+			receiverId: selectedUser?._id,
+			message
+		}
+		try {
+			const response = await fetch(`http://localhost:8999/api/message/send/${getCurrentUser()?._id}`, {
+				method:"POST",
+				headers: {
+					"Content-Type":"application/json",
+				},
+				body:JSON.stringify(payload)
+			});      
+			response.json().then((res:any) => {
+                getMessages()
+            })
+			setMessage("")
+			
+			
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+    
     return (
-        <div className='md:min-w-[450px] flex flex-col'>
-            {!selectedConversation ?
+        <div className='md:min-w-[450px] flex flex-col scroll-auto scroll-smooth focus:scroll-auto' ref={messageContainer}>
+            {!selectedUser ?
                 <NoChatSelected /> :
-
                 <>
                     {/* Header */}
                     <div className='bg-slate-500 px-4 py-2 mb-2'>
-                        <span className='label-text'>To:</span> <span className='text-gray-900 font-bold'>John doe</span>
+                        <span className='label-text'>To:</span> <span className='text-gray-900 font-bold'>{selectedUser.fullName}</span>
                     </div>
-
-                    <Messages />
-                    <MessageInput />
+                    <Messages listMessages={listMessages} lastMessageRef={lastMessageRef} />
+                    <MessageInput handleSendMessage={handleSendMessage} message={message} setMessage={setMessage} />
                 </>}
         </div>
     );
