@@ -5,10 +5,11 @@ import cookieParser from "cookie-parser";
 import morgan from "morgan";
 
 import authRoute from "./routes/auth.route.js";
-import messagesRoute from "./routes/auth.route.js"
+import messagesRoute from "./routes/message.route.js"
 import usersRoute from "./routes/user.routes.js"
 
 import connectMongoDB from "./db/connection.js";
+import { app, server } from "./socket/socket.js";
 
 
 morgan(function (tokens, req, res) {
@@ -23,7 +24,7 @@ morgan(function (tokens, req, res) {
 
   
   
-const app = express()
+// const app = express()
 dotenv.config()
 app.use(morgan("dev"))
 app.use(cors())
@@ -37,7 +38,7 @@ const PORT = process.env.PORT || 8900;
 app.use("/api/auth", authRoute);
 app.use("/api/message", messagesRoute);
 app.use("/api/users", usersRoute);
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     connectMongoDB()
     console.log(`Server is running on port ${PORT}`)
 })

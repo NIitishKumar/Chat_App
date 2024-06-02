@@ -7,9 +7,9 @@ const Sidebar = () => {
 	return (
 		<div className='border-r border-slate-500 p-4 flex flex-col overflow-auto'>
 			<div className="flex my-3 ml-2 font-mono">
-				<h1 className="text-white">{getCurrentUser()?.fullName}</h1>
+				<h1 className="text-white bg-clip-text font-bold">{getCurrentUser()?.fullName}</h1>
 			</div>
-			<SearchInput />
+			{/* <SearchInput /> */}
 			<div className='divider px-3'>
             </div>
 			<Conversations />

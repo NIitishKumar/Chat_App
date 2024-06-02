@@ -19,7 +19,6 @@ export const signup = async (req, res) => {
             return res.status(400).json({error : "Password doesn't match!"})
         }
         const all = User.find({}).lean();
-        console.log(all, "======-----")
         
         const user = await User.findOne({userName});
         
@@ -39,7 +38,6 @@ export const signup = async (req, res) => {
             gender,
             profilePic: gender == "male" ? borProfilePic : gitlProfilePci
         }) 
-        console.log("jbhgvhbhgvfcvghbn",newUser, hashPwd)
         if (newUser){
             const use = generateTokenAndSetCookie(newUser._id, res);
             await newUser.save();
@@ -51,10 +49,6 @@ export const signup = async (req, res) => {
                 userName:newUser.userName
             })
         }
-
-
-
-
 
         res.send("Login")
         } catch (error) {
@@ -83,6 +77,6 @@ export const login = async (req, res) => {
         })
 
     } catch (error) {
-        res.status(500).json({erroe:"Internal server error"})
+        res.status(500).json({error:"Internal server error"})
     }
 }
