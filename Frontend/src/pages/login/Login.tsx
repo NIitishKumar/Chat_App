@@ -59,9 +59,9 @@ function Login() {
 							onChange={(e) => setPassword(e.target.value)}
 						/>
 					</div>
-					{/* <link to='/signup' className='text-sm  hover:underline hover:text-blue-600 mt-2 inline-block'>
+					<a href={'/signup'} className='flex justify-end text-sm  hover:underline hover:text-blue-600 mt-2 inline-block'>
 						{"Don't"} have an account?
-					</link> */}
+					</a>
 
 					<div>
 						<button className='btn btn-block btn-sm mt-2' disabled={isLoading}>
