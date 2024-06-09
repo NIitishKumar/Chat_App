@@ -15,7 +15,7 @@ const MessagesContextProvider = ({children}:any) => {
 	const getMessages = async () => {
         if(!getCurrentUser()?._id || !selectedUser?._id) return
 		try {
-			const data = await fetch(`http://localhost:8999/api/message/${getCurrentUser()?._id}?id=${JSON.stringify(selectedUser?._id)}`)
+			const data = await fetch(`https://chat-app-2lq8.onrender.com/api/message/${getCurrentUser()?._id}?id=${JSON.stringify(selectedUser?._id)}`)
 			const list = await data.json();
 			setListMessages(list)
 		} catch (error) {

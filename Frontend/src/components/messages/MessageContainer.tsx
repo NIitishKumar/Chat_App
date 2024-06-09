@@ -52,7 +52,7 @@ const MessageContainer = () => {
 			message
 		}
 		try {
-			const response = await fetch(`http://localhost:8999/api/message/send/${getCurrentUser()?._id}`, {
+			const response = await fetch(`https://chat-app-2lq8.onrender.com/api/message/send/${getCurrentUser()?._id}`, {
 				method:"POST",
 				headers: {
 					"Content-Type":"application/json",

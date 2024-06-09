@@ -11,7 +11,7 @@ function useLogin() {
 
         setIsLoading(true)
         try {
-            const data:any = await fetch("http://localhost:8999/api/auth/login", {
+            const data:any = await fetch("https://chat-app-2lq8.onrender.com/api/auth/login", {
                 method:"POST",
                  body : JSON.stringify({userName, password}),
                  headers: {"Content-Type" : "application/json"}

@@ -12,7 +12,7 @@ const  useSignup = () => {
         if (!success) return;
         setisLoading(true)
         try {
-            const data = await fetch("http://localhost:8999/api/auth/signup",{
+            const data = await fetch("https://chat-app-2lq8.onrender.com/api/auth/signup",{
                 method:"POST",
                 headers:{"Content-Type": "application/json"},
                 body : JSON.stringify({

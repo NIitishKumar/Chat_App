@@ -12,7 +12,7 @@ export const SocketContextProvider = ({ children }:any) => {
 
     useEffect(():any => {
         if(getCurrentUser()){
-            const socket = io("http://localhost:8999", {
+            const socket = io("https://chat-app-2lq8.onrender.com", {
                 query: {
                     userId: getCurrentUser()?._id
                 }
@@ -40,7 +40,7 @@ export const SocketContextProvider = ({ children }:any) => {
             listMessages.push(newMessage)
             if(!listMessages?.length) return;
             try {
-                fetch(`http://localhost:8999/api/message/${newMessage?.receiverId}?id=${JSON.stringify(newMessage?.senderId)}`).then(async (res:any) => {
+                fetch(`https://chat-app-2lq8.onrender.com/api/message/${newMessage?.receiverId}?id=${JSON.stringify(newMessage?.senderId)}`).then(async (res:any) => {
                     setListMessages(await res.json())
                 })
             } catch (error) {

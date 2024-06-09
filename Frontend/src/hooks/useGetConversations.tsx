@@ -8,7 +8,7 @@ function useGetConversations() {
     const getConversations = async () => {
         try {
             setIsLoading(true)
-            const data = await fetch("http://localhost:8999/api/users")
+            const data = await fetch("https://chat-app-2lq8.onrender.com/api/users")
             const res = await data.json();
             if(res.error) throw new Error(res.error);
             let temp = res.filter((res:any) => res._id != JSON.parse(localStorage.getItem("currentUser") || "")?._id)
