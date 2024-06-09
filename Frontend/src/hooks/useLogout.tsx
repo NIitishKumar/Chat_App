@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 function useLogout() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const {setAuthUser}  = useAuthContext();
+    const {setAuthUser}:any  = useAuthContext();
 
     const logout = async () => {
         setIsLoading(true)

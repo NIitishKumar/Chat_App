@@ -60,6 +60,7 @@ const MessageContainer = () => {
 				body:JSON.stringify(payload)
 			});      
 			response.json().then((res:any) => {
+                console.log(res)
                 getMessages()
             })
 			setMessage("")
